@@ -1,0 +1,480 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    background-image: url(https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2967&q=800);
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Cute Font' !important;
+    user-select: none;
+    transition: 0.5s;
+    margin: 0;
+    padding: 15px;
+}
+
+.topnav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background: transparent;
+    margin-bottom: 15px;
+}
+
+.topnav span {
+    color: white;
+    padding: 10px 16px;
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.topnav span:hover {
+    background: rgba(0,0,0,0.25);
+}
+
+#calcu {
+    width: 95%;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 30px rgba(0,0,0,0.45);
+    background: white;
+    border-radius: 15px;
+    transition: background 0.5s, border 0.5s, width 0.3s;
+    animation: animatebottom 1s ease;
+}
+
+.top-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.mode-icon,
+.backspace-icon {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    background: transparent;
+    color: #111;
+    border: none;
+    border-radius: 50%;
+    font-family: 'Cute Font' !important;
+    font-size: 29px;
+    cursor: pointer;
+}
+
+.mode-icon:hover,
+.backspace-icon:hover {
+    background: #eeeeee;
+}
+
+.mode-icon.active {
+    background: #eeeeee;
+}
+
+.backspace-icon {
+    margin-left: auto;
+}
+
+.display-area {
+    width: 100%;
+    margin-bottom: 14px;
+    text-align: right;
+}
+
+.display-area.hidden {
+    display: none !important;
+}
+
+#previousDisplay {
+    min-height: 20px;
+    font-size: 20px;
+    color: #777;
+    overflow-wrap: anywhere;
+}
+
+#text1 {
+    width: 100%;
+    height: 72px;
+    padding: 15px;
+    background: #e3e3e3;
+    border: 6px solid #cccccc;
+    border-radius: 7px;
+    text-align: right;
+    font-family: 'Cute Font' !important;
+    font-size: 38px;
+    color: #111;
+    transition: 0.5s;
+}
+
+#calculatorContent {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+}
+
+#calculatorContent.hidden {
+    display: none !important;
+}
+
+.keypad {
+    flex: 5;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: repeat(5, 58px);
+    gap: 8px;
+}
+
+.scientific-panel {
+    display: none;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.scientific-panel.show {
+    display: grid;
+    flex: 4;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(5, 58px);
+    gap: 8px;
+    animation: fadeIn 0.25s ease;
+}
+
+#calcu button:not(.mode-icon):not(.backspace-icon) {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #000000;
+    border-radius: 7px;
+    font-family: 'Cute Font' !important;
+    font-size: 27px;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+#calcu button:not(.mode-icon):not(.backspace-icon):hover {
+    background: #333333 !important;
+}
+
+#calcu button:not(.mode-icon):not(.backspace-icon):active {
+    background: #555555 !important;
+    transform: scale(0.96);
+}
+
+.scientific-panel button {
+    font-size: 23px !important;
+}
+
+.extra-panel {
+    display: none;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.extra-panel.show {
+    display: block;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+}
+
+.panel-heading h2,
+.extra-panel h2 {
+    font-size: 28px;
+    color: #111;
+    margin: 5px 0 15px;
+}
+
+#historyList {
+    max-height: 230px;
+    overflow-y: auto;
+    text-align: right;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.history-item {
+    padding: 10px;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.history-item::before,
+.history-item::after {
+    display: none !important;
+}
+
+.history-expression {
+    color: #777;
+}
+
+.history-result {
+    color: #111;
+    font-size: 26px;
+}
+
+.history-item:hover {
+    background: #eeeeee;
+}
+
+.empty-message {
+    text-align: center;
+    color: #777;
+    font-size: 22px;
+}
+
+.clear-button {
+    padding: 5px 15px;
+    min-height: 38px !important;
+    font-size: 19px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+#converterPanel,
+#unitCategory,
+.converter-row,
+.converter-column {
+    box-shadow: none;
+}
+
+#unitCategory {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Cute Font' !important;
+    font-size: 23px;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.converter-row {
+    display: grid;
+    grid-template-columns: 1fr 45px 1fr;
+    gap: 12px;
+    align-items: center;
+    border: none;
+}
+
+.converter-column {
+    min-width: 0;
+}
+
+.converter-column label {
+    display: block;
+    text-align: left;
+    font-size: 21px;
+}
+
+.converter-column input {
+    width: 100%;
+    height: 60px;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Cute Font' !important;
+    font-size: 27px;
+    text-align: right;
+    padding: 8px;
+}
+
+.converter-column select {
+    width: 100%;
+    padding: 8px;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Cute Font' !important;
+    font-size: 20px;
+}
+
+.swap-button {
+    min-height: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+}
+
+body.dark-mode {
+    background: #000000 !important;
+    background-image: none !important;
+}
+
+body.dark-mode #calcu {
+    background: #080808 !important;
+    border: 1.5px solid #ffffff !important;
+    box-shadow: 0 0 15px rgba(255,255,255,0.08);
+}
+
+body.dark-mode .topnav span {
+    color: white;
+}
+
+body.dark-mode #text1 {
+    background: #181818 !important;
+    color: #ffffff !important;
+    border-color: #444444;
+}
+
+body.dark-mode #previousDisplay {
+    color: #aaaaaa;
+}
+
+body.dark-mode .mode-icon,
+body.dark-mode .backspace-icon {
+    color: #ffffff !important;
+}
+
+body.dark-mode .mode-icon:hover,
+body.dark-mode .backspace-icon:hover,
+body.dark-mode .mode-icon.active {
+    background: #333333;
+}
+
+body.dark-mode .extra-panel,
+body.dark-mode .extra-panel h2,
+body.dark-mode .history-result {
+    color: white;
+}
+
+body.dark-mode .history-item {
+    border: none !important;
+    border-bottom: none !important;
+}
+
+body.dark-mode .history-expression,
+body.dark-mode .empty-message {
+    color: #aaaaaa;
+}
+
+body.dark-mode .history-item:hover {
+    background: #222222;
+}
+
+body.dark-mode .converter-column input,
+body.dark-mode .converter-column select,
+body.dark-mode #unitCategory {
+    background: #181818;
+    color: white;
+    border-color: #444444;
+}
+
+body.dark-mode .converter-column label {
+    color: white;
+}
+
+@keyframes animatebottom {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 8px;
+    }
+
+    #calcu {
+        width: 100%;
+        padding: 12px;
+    }
+
+    #calculatorContent {
+        gap: 5px;
+    }
+
+    .keypad {
+        gap: 5px;
+        grid-template-rows: repeat(5, 48px);
+    }
+
+    .scientific-panel.show {
+        gap: 5px;
+        grid-template-rows: repeat(5, 48px);
+    }
+
+    #calcu button:not(.mode-icon):not(.backspace-icon) {
+        font-size: 20px;
+    }
+
+    .scientific-panel button {
+        font-size: 17px !important;
+    }
+
+    #text1 {
+        height: 62px;
+        font-size: 30px;
+    }
+
+    .mode-icon,
+    .backspace-icon {
+        width: 40px;
+        height: 40px;
+        min-height: 40px;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .scientific-panel.show {
+        flex: 4;
+    }
+
+    .keypad {
+        flex: 5;
+    }
+
+    .scientific-panel button {
+        font-size: 15px !important;
+    }
+}

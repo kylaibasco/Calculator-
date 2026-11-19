@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=VT323|Cute+Font" rel="stylesheet">
+    <link rel="stylesheet" href="calcu.css">
+</head>
+<body>
+
+    <div class="topnav">
+        <span onclick="settings()" id="fst">
+            Turn Dark Mode On
+        </span>
+
+        <span onclick="dm()" id="dm1" style="display:none;">
+            Turn Dark Mode Off
+        </span>
+    </div>
+
+    <main id="calcu">
+
+        <div class="top-icons">
+
+            <button class="mode-icon" id="historyIcon"
+                onclick="toggleHistory()" title="History">
+                ◷
+            </button>
+
+            <button class="mode-icon" id="converterIcon"
+                onclick="toggleConverter()" title="Unit Converter">
+                ▤
+            </button>
+
+            <button class="mode-icon" id="scientificIcon"
+                onclick="toggleScientific()" title="Scientific Mode">
+                √π
+            </button>
+
+            <button class="backspace-icon"
+                onclick="backspace()" title="Backspace">
+                ⌫
+            </button>
+
+        </div>
+
+        <div class="display-area" id="displayArea">
+            <div id="previousDisplay"></div>
+
+            <input
+                type="text"
+                id="text1"
+                placeholder="0"
+                readonly
+            >
+        </div>
+
+        <div id="calculatorContent">
+
+            <div id="scientificPanel" class="scientific-panel">
+
+                <button onclick="scientific('sin(')">sin</button>
+                <button onclick="scientific('cos(')">cos</button>
+                <button onclick="scientific('tan(')">tan</button>
+                <button onclick="scientific('asin(')">sin⁻¹</button>
+
+                <button onclick="scientific('acos(')">cos⁻¹</button>
+                <button onclick="scientific('atan(')">tan⁻¹</button>
+                <button onclick="scientific('log(')">log</button>
+                <button onclick="scientific('ln(')">ln</button>
+
+                <button onclick="scientific('sqrt(')">√</button>
+                <button onclick="scientific('cbrt(')">∛</button>
+                <button onclick="square()">x²</button>
+                <button onclick="scientific('**3')">x³</button>
+
+                <button onclick="scientific('**')">xʸ</button>
+                <button onclick="scientific('!')">!</button>
+                <button onclick="scientific('pi')">π</button>
+                <button onclick="scientific('e')">e</button>
+
+                <button onclick="scientific('abs(')">|x|</button>
+                <button onclick="scientific('exp(')">eˣ</button>
+                <button onclick="scientific('(')">(</button>
+                <button onclick="scientific(')')">)</button>
+
+            </div>
+
+            <div class="keypad" id="basicKeypad">
+
+                <button onclick="clear_screen()">C</button>
+                <button onclick="event1('(')">(</button>
+                <button onclick="event1(')')">)</button>
+                <button onclick="event1('%')">%</button>
+                <button onclick="event1('/')">÷</button>
+
+                <button onclick="event1('7')">7</button>
+                <button onclick="event1('8')">8</button>
+                <button onclick="event1('9')">9</button>
+                <button onclick="event1('*')">×</button>
+                <button onclick="event1('-')">−</button>
+
+                <button onclick="event1('4')">4</button>
+                <button onclick="event1('5')">5</button>
+                <button onclick="event1('6')">6</button>
+                <button onclick="event1('+')">+</button>
+                <button onclick="square()">x²</button>
+
+                <button onclick="event1('1')">1</button>
+                <button onclick="event1('2')">2</button>
+                <button onclick="event1('3')">3</button>
+                <button onclick="event1('0')">0</button>
+                <button onclick="sr()">√</button>
+
+                <button onclick="toggleSign()">+/−</button>
+                <button onclick="event1('.')">.</button>
+                <button onclick="event1('00')">00</button>
+                <button onclick="cr()">3√</button>
+                <button onclick="event2()">=</button>
+
+            </div>
+
+        </div>
+
+        <div id="historyPanel" class="extra-panel">
+
+            <div class="panel-heading">
+                <h2>History</h2>
+
+                <button class="clear-button" onclick="clearHistory()">
+                    Clear
+                </button>
+            </div>
+
+            <div id="historyList">
+                <p class="empty-message">No history yet.</p>
+            </div>
+
+        </div>
+
+        <div id="converterPanel" class="extra-panel">
+
+            <h2>Unit Converter</h2>
+
+            <select id="unitCategory" onchange="loadUnits()">
+                <option value="Length">Length</option>
+                <option value="Area">Area</option>
+                <option value="Temperature">Temperature</option>
+                <option value="Volume">Volume</option>
+                <option value="Mass">Mass</option>
+                <option value="Data">Data</option>
+                <option value="Speed">Speed</option>
+                <option value="Time">Time</option>
+            </select>
+
+            <div class="converter-row">
+
+                <div class="converter-column">
+                    <label>From</label>
+
+                    <input
+                        type="number"
+                        id="fromValue"
+                        value="1"
+                        oninput="convertUnits()"
+                    >
+
+                    <select id="fromUnit" onchange="convertUnits()"></select>
+                </div>
+
+                <button class="swap-button" onclick="swapUnits()">
+                    ⇄
+                </button>
+
+                <div class="converter-column">
+                    <label>To</label>
+
+                    <input type="text" id="toValue" readonly>
+
+                    <select id="toUnit" onchange="convertUnits()"></select>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="calcu.js"></script>
+
+</body>
+</html>
